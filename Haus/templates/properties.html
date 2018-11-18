@@ -1,0 +1,276 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block body_block %}
+  <section class="probootstrap-slider flexslider2 page-inner">
+    <div class="overlay"></div>
+    <div class="probootstrap-wrap-banner">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-8">
+
+            <div class="page-title probootstrap-animate">
+              <div class="probootstrap-breadcrumbs">
+                <a href="#">Home</a><span>Properties</span>
+              </div>
+              <h1>Properties</h1>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <ul class="slides">
+      <li style="background-image: url({% static 'img/bb.jpg' %})"></li>
+      <li style="background-image: url({% static 'img/bb.jpg' %})"></li>
+      <li style="background-image: url({% static 'img/bb.jpg' %})"></li>
+    </ul>
+  </section>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+  <!-- END: slider  -->
+  {% for message in messages %}
+
+               <div class="alert alert-success">
+                   <a class="close" href="{% url 'properties' %}" data-dismiss="alert">×</a>
+
+                   {{ message }}
+
+               </div>
+  {% endfor %}
+
+
+
+  <div class="accordion" id="accordionExample">
+  <div class="card">
+    <div class="card-header" id="headingOne">
+      <h5 class="mb-0">
+        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+          Properies on rent
+        </button>
+      </h5>
+    </div>
+
+    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+      <div class="card-body">
+
+
+        <section class="probootstrap-section probootstrap-section-lighter">
+          <div class="container">
+            <div class="row">
+
+
+              {% for list in data1 %}
+              <div class="col-md-4 col-sm-6">
+                <div class="probootstrap-card probootstrap-listing">
+                  <div class="probootstrap-card-media">
+                    <img src="{{list.pictures.url}}" class="img-responsive">
+                  </div>
+                  <div class="probootstrap-card-text">
+                    <h2 class="probootstrap-card-heading"><a href="{% url 'details' %}">{{list.title}}</a></h2>
+                    <div class="probootstrap-listing-location">
+                      <i class="icon-location2"></i> <span>{{list.locality}}</span>
+                    </div>
+                    <div class="probootstrap-listing-price"><strong>{{list.price}}</strong></div>
+                  </div>
+                  <div class="probootstrap-card-extra">
+                    <ul>
+                      <li>
+                        Area
+                        <span>{{list.area}}</span>
+                      </li>
+                      <li>
+                        Beds
+                        <span>{{list.bedrooms}}</span>
+                      </li>
+                      <li>
+                        Bathrooms
+                        <span>{{list.bathrooms}}</span>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="probootstrap-card-extra">
+                    <form enctype="multipart/form-data" method="POST" class="probootstrap-form">
+                      {% csrf_token %}
+                      <button type="submit" class="btn btn-primary">Send Enquiry</button>
+                    </form>
+                  </div>
+                </div>
+              </div>
+              {% endfor %}
+
+
+
+            </div>
+          </div>
+        </section>
+
+
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" id="headingtwo">
+      <h5 class="mb-0">
+        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+          PGs availables
+        </button>
+      </h5>
+    </div>
+
+    <div id="collapseOne" class="collapse show" aria-labelledby="headingtwo" data-parent="#accordionExample">
+      <div class="card-body">
+
+
+        <section class="probootstrap-section probootstrap-section-lighter">
+          <div class="container">
+            <div class="row">
+
+
+              {% for list in data2 %}
+              <div class="col-md-4 col-sm-6">
+                <div class="probootstrap-card probootstrap-listing">
+                  <div class="probootstrap-card-media">
+                    <img src="{{list.pictures.url}}" class="img-responsive">
+                  </div>
+                  <div class="probootstrap-card-text">
+                    <h2 class="probootstrap-card-heading"><a href="{% url 'details' %}">{{list.title}}</a></h2>
+                    <div class="probootstrap-listing-location">
+                      <i class="icon-location2"></i> <span>{{list.locality}}</span>
+                    </div>
+                    <div class="probootstrap-listing-price"><strong>{{list.price}}</strong></div>
+                  </div>
+                  <div class="probootstrap-card-extra">
+                    <ul>
+                      <li>
+                        Area
+                        <span>{{list.area}}</span>
+                      </li>
+                      <li>
+                        Beds
+                        <span>{{list.bedrooms}}</span>
+                      </li>
+                      <li>
+                        Bathrooms
+                        <span>{{list.bathrooms}}</span>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="probootstrap-card-extra">
+                    <form enctype="multipart/form-data" method="POST" class="probootstrap-form">
+                      {% csrf_token %}
+                      <button type="submit" class="btn btn-primary">Send Enquiry</button>
+                    </form>
+                  </div>
+                </div>
+              </div>
+              {% endfor %}
+
+
+
+            </div>
+          </div>
+        </section>
+
+
+      </div>
+    </div>
+  </div>
+
+
+
+
+  <div class="card">
+    <div class="card-header" id="headingthree">
+      <h5 class="mb-0">
+        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+          Properies on sale
+        </button>
+      </h5>
+    </div>
+
+    <div id="collapseOne" class="collapse show" aria-labelledby="headingthree" data-parent="#accordionExample">
+      <div class="card-body">
+
+
+        <section class="probootstrap-section probootstrap-section-lighter">
+          <div class="container">
+            <div class="row">
+
+
+              {% for list in data3 %}
+              <div class="col-md-4 col-sm-6">
+                <div class="probootstrap-card probootstrap-listing">
+                  <div class="probootstrap-card-media">
+                    <img src="{{list.pictures.url}}" class="img-responsive">
+                  </div>
+                  <div class="probootstrap-card-text">
+                    <h2 class="probootstrap-card-heading"><a href="{% url 'details' %}">{{list.title}}</a></h2>
+                    <div class="probootstrap-listing-location">
+                      <i class="icon-location2"></i> <span>{{list.locality}}</span>
+                    </div>
+                    <div class="probootstrap-listing-price"><strong>{{list.price}}</strong></div>
+                  </div>
+                  <div class="probootstrap-card-extra">
+                    <ul>
+                      <li>
+                        Area
+                        <span>{{list.area}}</span>
+                      </li>
+                      <li>
+                        Beds
+                        <span>{{list.bedrooms}}</span>
+                      </li>
+                      <li>
+                        Bathrooms
+                        <span>{{list.bathrooms}}</span>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="probootstrap-card-extra">
+                    <form enctype="multipart/form-data" method="POST" class="probootstrap-form">
+                      {% csrf_token %}
+                      <button type="submit" class="btn btn-primary">Send Enquiry</button>
+                    </form>
+
+                  </div>
+                </div>
+              </div>
+              {% endfor %}
+
+
+
+            </div>
+          </div>
+        </section>
+
+
+      </div>
+    </div>
+  </div>
+
+
+</div>
+
+
+
+
+
+
+
+
+  <section class="probootstrap-half reverse">
+    <div class="image-wrap">
+      <div class="image" style="background-image: url(img/slider_5.jpg);"></div>
+    </div>
+    <div class="text">
+      <p class="mb10 subtitle">Why Choose Us</p>
+      <h3 class="mt0 mb40">You Will Love Our Services</h3>
+      <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>
+      <p class="mb50">A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.</p>
+      <p><a href="#" class="btn btn-primary mb10">Find out more</a></p>
+    </div>
+  </section>
+{% endblock %}
